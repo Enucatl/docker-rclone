@@ -27,6 +27,14 @@ services:
       - --vfs-cache-mode=full
       - --cache-dir=/data/cache
       - --vfs-cache-max-size=20G
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q -S -O /dev/null http://127.0.0.1:8000/ 2>&1 | grep -qE 'HTTP/[0-9.]+ (200|401)'
+      interval: 120s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
       cloudflared:
         condition: service_healthy
