@@ -11,8 +11,6 @@ services:
     volumes:
       - ./config:/config/rclone
       - rclone_cache:/data/cache
-    labels:
-      - "checkmk_monitor=true"
     environment:
       - B2_BUCKET_NAME
       - RCLONE_CONFIG_B2REMOTE_ACCOUNT
@@ -43,8 +41,6 @@ services:
     secrets:
       - tunnel_token
     command: tunnel run
-    labels:
-      - "checkmk_monitor=true"
 
 volumes:
   rclone_cache:
